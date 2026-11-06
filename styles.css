@@ -1,0 +1,1710 @@
+/* ==========================================================================
+   Heritage Clutch — Realistic 3D Scroll-Driven Editorial Experience
+   Stylesheet (styles.css)
+   Design Language: Karnataka Royal Heritage, Sandalwood Silk Cream & Deep Burgundy
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Harmonised Heritage Colour Tokens (Calibrated to Artwork #FEF3E2 / #FCEFDC)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Royal Mysuru Burgundy & Velvet Wine (Matches Official A × LP Crest) */
+  --color-burgundy: #7E1921;
+  --color-burgundy-dark: #5A1017;
+  --color-burgundy-deep: #430B10;
+
+  /* Warm Sandalwood & Silk Cream (Matched to Supplied Artwork Backgrounds) */
+  --color-cream: #ffffff;
+  --color-ivory: #ffffff;
+  --color-sandalwood: #ffffff;
+
+  /* Antique Zari Gold & Warm Espresso Ink */
+  --color-gold: #B89358;
+  --color-gold-bright: #D4B47B;
+  --color-gold-line: rgba(184, 147, 88, 0.32);
+  --color-charcoal: #231D1A;
+  --color-charcoal-muted: #5C4F44;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', 'Noto Serif Kannada', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Kannada', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout & 3D Perspective */
+  --header-height: 5.25rem;
+  --container-max: 1320px;
+  --gutter-desktop: 3.5rem;
+  --gutter-tablet: 2rem;
+  --gutter-mobile: 1.25rem;
+  --stage-perspective: 1600px;
+
+  /* Motion Curves */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 200ms;
+  --duration-medium: 520ms;
+  --duration-slow: 820ms;
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Base Setup
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-charcoal);
+  background-color: var(--color-cream);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-burgundy);
+  outline-offset: 4px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: var(--gutter-desktop);
+  padding-right: var(--gutter-desktop);
+}
+
+/* Top Scroll Progress Hairline */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2.5px;
+  width: 100%;
+  background: transparent;
+  z-index: 70;
+  pointer-events: none;
+}
+
+.scroll-progress-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-burgundy), var(--color-gold));
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* Shared Editorial Overlines & Heritage Fleur-de-lis Divider (Matches Logo) */
+.heritage-overline-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.heritage-overline {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-burgundy);
+}
+
+.heritage-overline--light {
+  color: var(--color-gold-bright);
+}
+
+.heritage-fleur-rule {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--color-burgundy);
+}
+
+.heritage-fleur-rule--center {
+  justify-content: center;
+  margin-top: 0.7rem;
+}
+
+.heritage-fleur-rule--gold .fleur-icon {
+  color: var(--color-gold-bright);
+}
+
+.heritage-fleur-rule--gold .fleur-line {
+  background-color: rgba(212, 180, 123, 0.5);
+}
+
+.fleur-line {
+  width: 2.75rem;
+  height: 1px;
+  background-color: var(--color-gold);
+}
+
+.fleur-icon {
+  width: 15px;
+  height: 13px;
+  color: var(--color-burgundy);
+  flex-shrink: 0;
+}
+
+.section-editorial-header {
+  text-align: center;
+  max-width: 44rem;
+  margin: 0 auto 3.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.15rem, 3.4vw, 3.05rem);
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--color-charcoal);
+  text-wrap: balance;
+  margin-top: 0.35rem;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. Section A — Minimal Heritage Navigation Header
+   Left Navigation | Centered Official Crest | Right Language Switch
+   -------------------------------------------------------------------------- */
+
+
+/* =====================================================
+   SECTION 3 — HERITAGE HEADER
+   White text / Burgundy background
+   ===================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+
+  height: var(--header-height);
+
+  background-color: rgba(71, 11, 11, 0.93);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid var(--color-gold-line);
+
+  transition: background-color
+    var(--duration-fast) var(--ease-luxury);
+}
+
+/* Header layout */
+.header-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+/* Left navigation */
+.primary-nav {
+  display: flex;
+  align-items: center;
+  justify-self: start;
+  gap: 2.25rem;
+}
+
+.site-header .nav-link {
+  position: relative;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+
+  opacity: 1 !important;
+
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 0.4rem 0;
+
+  transition: opacity 200ms ease;
+}
+
+/* Active underline */
+.site-header .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 1.5px;
+
+  background-color: #ffffff;
+
+  transform: scaleX(0);
+  transform-origin: right center;
+
+  transition: transform 200ms ease;
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link.is-active {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.site-header .nav-link:hover::after,
+.site-header .nav-link.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Centre logo */
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  padding: 0.25rem 0.5rem;
+
+  transition: transform
+    var(--duration-medium) var(--ease-luxury);
+}
+
+.brand-link:hover {
+  transform: translateY(-1px) scale(1.03);
+}
+
+.brand-logo-img {
+  height: 3.9rem;
+  width: auto;
+  object-fit: contain;
+
+  filter: drop-shadow(
+    0 2px 6px rgba(255, 255, 255, 0.08)
+  );
+}
+
+/* Right language selector */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+
+  gap: 0.45rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* English and Kannada — always white */
+.site-header .lang-btn {
+  position: relative;
+
+  font-size: 0.85rem;
+
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+
+  opacity: 1 !important;
+
+  padding: 0.35rem 0.3rem;
+  min-height: 40px;
+
+  transition: opacity 200ms ease;
+}
+
+.site-header .lang-btn.is-active {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+
+  font-weight: 600;
+  opacity: 1 !important;
+}
+
+.site-header .lang-btn:hover {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+/* Language separator */
+.site-header .lang-divider {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. Section B — Frameless Scroll-Driven 3D Levitating Hero Stage
+   -------------------------------------------------------------------------- */
+.hero-scroll-track {
+  position: relative;
+  min-height: 120vh;
+  padding-top: var(--header-height);
+  /* Pure warm silk-cream surface (#FEF4E5) so multiply-blended artwork has zero edge contrast */
+  background-color: #FEF4E5;
+  border-bottom: 1px solid var(--color-gold-line);
+}
+
+.hero-sticky-viewport {
+  position: sticky;
+  top: var(--header-height);
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100svh - var(--header-height));
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 5.2fr 6.8fr;
+  align-items: center;
+  gap: 3.25rem;
+  padding-top: 2rem;
+  padding-bottom: 2.5rem;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 5;
+  max-width: 34rem;
+  will-change: transform, opacity;
+  animation: heroCopyReveal 950ms var(--ease-silk) both;
+}
+
+@keyframes heroCopyReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2.65rem, 4.3vw, 4.15rem);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--color-charcoal);
+  text-wrap: balance;
+  margin-bottom: 1.2rem;
+}
+
+.hero-subtitle {
+  font-size: 1.0625rem;
+  line-height: 1.72;
+  color: var(--color-charcoal-muted);
+  max-width: 44ch;
+  margin-bottom: 2rem;
+}
+
+/* 3D Flip Finish Selector */
+.finish-selector {
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--color-gold-line);
+  margin-bottom: 2rem;
+}
+
+.finish-options {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.finish-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.45rem 0;
+  min-height: 44px;
+  font-size: 0.95rem;
+  color: var(--color-charcoal-muted);
+  white-space: nowrap;
+  position: relative;
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+.finish-option::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-burgundy);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duration-fast) var(--ease-luxury);
+}
+
+.finish-option:hover {
+  color: var(--color-charcoal);
+}
+
+.finish-option.is-active {
+  color: var(--color-burgundy);
+  font-weight: 600;
+}
+
+.finish-option.is-active::after {
+  transform: scaleX(1);
+}
+
+.finish-swatch {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid rgba(35, 29, 26, 0.3);
+  transition: transform var(--duration-fast) var(--ease-luxury);
+}
+
+.finish-swatch--black {
+  background: radial-gradient(circle at 30% 30%, #3d3935, #141210);
+}
+
+.finish-swatch--gold {
+  background: radial-gradient(circle at 30% 30%, #edd39c, #a88243);
+}
+
+.finish-option.is-active .finish-swatch {
+  transform: scale(1.18);
+  border-color: var(--color-burgundy);
+}
+
+/* Understated Text-Link Actions */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  flex-wrap: wrap;
+}
+
+.text-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-burgundy);
+  padding: 0.45rem 0;
+  min-height: 44px;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-burgundy);
+  transition: color var(--duration-fast) var(--ease-luxury),
+              border-color var(--duration-fast) var(--ease-luxury);
+}
+
+.text-action--secondary {
+  color: var(--color-charcoal);
+  border-bottom-color: var(--color-gold);
+}
+
+.text-action:hover {
+  color: var(--color-burgundy-dark);
+  border-bottom-color: var(--color-burgundy-dark);
+}
+
+.action-arrow {
+  width: 15px;
+  height: 15px;
+  transition: transform var(--duration-fast) var(--ease-luxury);
+}
+
+.text-action:hover .action-arrow {
+  transform: translateX(4px);
+}
+
+/* Frameless 3D Spatial Product Stage */
+.hero-3d-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3.35;
+  max-height: 590px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: var(--stage-perspective);
+  animation: heroStageEntrance 1100ms var(--ease-silk) 100ms both;
+}
+
+@keyframes heroStageEntrance {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.hero-3d-rig {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* The illustrations include their own hand-painted ground shadow; keep ambient shadow subtle */
+.hero-3d-shadow {
+  display: none;
+}
+
+.hero-product-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translate3d(0, 14px, -45px) rotateY(-22deg) scale(0.93);
+  pointer-events: none;
+  transition: opacity var(--duration-slow) var(--ease-luxury),
+              transform var(--duration-slow) var(--ease-luxury);
+}
+
+.hero-product-layer.is-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 35px) rotateY(0deg) scale(1);
+  pointer-events: auto;
+}
+
+.hero-product-img {
+  width: 100%;
+  height: 100%;
+  max-width: 640px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: contrast(1.03);
+  /* Feather outer edges so rectangular artwork bounds never appear during 3D tilt */
+  -webkit-mask-image: radial-gradient(ellipse 90% 88% at 50% 50%, #000 74%, transparent 100%);
+  mask-image: radial-gradient(ellipse 90% 88% at 50% 50%, #000 74%, transparent 100%);
+  user-select: none;
+}
+
+/* Subtle Interactive Specular Sheen Across the Clutch */
+.hero-specular-glint {
+  position: absolute;
+  inset: 8%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--glint-x, 50%) var(--glint-y, 40%),
+    rgba(255, 249, 239, 0.34) 0%,
+    rgba(255, 249, 239, 0) 55%
+  );
+  mix-blend-mode: soft-light;
+  transform: translateZ(50px);
+}
+
+/* --------------------------------------------------------------------------
+   5. Royal Burgundy Heritage Statement Band (Matches Reference Design)
+   -------------------------------------------------------------------------- */
+.heritage-motif-strip {
+  background: linear-gradient(180deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+  color: var(--color-cream);
+  padding: 4rem 0;
+  border-bottom: 1px solid rgba(184, 147, 88, 0.35);
+  text-align: center;
+}
+
+.heritage-motif-inner {
+  max-width: 48rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.heritage-motif-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 2.6vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--color-cream);
+}
+
+.heritage-motif-copy {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: rgba(254, 245, 231, 0.86);
+  max-width: 56ch;
+}
+
+/* --------------------------------------------------------------------------
+   6. Section C — Scroll-Driven 3D Pinned Step-by-Step Choreography
+      (Single Clean Illustration Surface — Zero Nested Boxes)
+   -------------------------------------------------------------------------- */
+.guide-scroll-section {
+  position: relative;
+  padding-top: 6rem;
+  padding-bottom: 4.5rem;
+  background-color: var(--color-cream);
+  border-bottom: 1px solid var(--color-gold-line);
+}
+
+.guide-scroll-layout {
+  display: grid;
+  grid-template-columns: 6.2fr 5.8fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Left Column: Pinned 3D Depth Stage on Desktop */
+.guide-pinned-stage-col {
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+  height: calc(100vh - var(--header-height) - 4rem);
+  height: calc(100svh - var(--header-height) - 4rem);
+  min-height: 460px;
+  max-height: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  perspective: var(--stage-perspective);
+}
+
+.guide-3d-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* Exact match to clasp-detail.webp (#FCEFDC) so there is zero inner box contrast */
+  background-color: #FCEFDC;
+  border: 1px solid var(--color-gold-line);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  box-shadow: 0 24px 48px -28px rgba(35, 29, 26, 0.14);
+}
+
+/* 3D Depth Stack of the 5 Real Instructional Illustrations */
+.guide-3d-frame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  transform: translate3d(0, 48px, -140px) rotateX(14deg) rotateY(-8deg) scale(0.88);
+  transition: opacity 680ms var(--ease-luxury),
+              transform 780ms var(--ease-luxury);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.guide-3d-frame.is-prev {
+  opacity: 0;
+  transform: translate3d(0, -48px, 90px) rotateX(-10deg) rotateY(6deg) scale(1.06);
+}
+
+.guide-3d-frame.is-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(1);
+  pointer-events: auto;
+}
+
+.guide-stage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: contrast(1.02);
+  transition: transform 400ms var(--ease-luxury);
+}
+
+/* Subtle 3D Step Progress Bar Along Bottom of Sticky Stage */
+.guide-stage-progress {
+  position: absolute;
+  left: 1.75rem;
+  right: 1.75rem;
+  bottom: 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  z-index: 5;
+}
+
+.stage-progress-segment {
+  flex: 1;
+  height: 2.5px;
+  background-color: rgba(184, 147, 88, 0.28);
+  overflow: hidden;
+  transition: background-color var(--duration-fast) var(--ease-luxury);
+}
+
+.stage-progress-segment.is-active {
+  background-color: var(--color-burgundy);
+}
+
+/* Right Column: Scroll-Triggered 3D Typography Steps */
+.guide-steps-stream {
+  padding-top: 2vh;
+  padding-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  perspective: 1000px;
+}
+
+.guide-step {
+  min-height: 54vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.75rem 0;
+  border-bottom: 1px solid var(--color-gold-line);
+  opacity: 0.34;
+  transform: translate3d(0, 16px, -24px) rotateX(3deg);
+  transition: opacity var(--duration-medium) var(--ease-luxury),
+              transform var(--duration-medium) var(--ease-luxury);
+  cursor: pointer;
+}
+
+.guide-step:last-child {
+  border-bottom: none;
+}
+
+.guide-step.is-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotateX(0deg);
+}
+
+.step-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  font-weight: 500;
+  line-height: 1.16;
+  color: var(--color-charcoal);
+  margin-bottom: 0.85rem;
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+.guide-step.is-active .step-heading {
+  color: var(--color-burgundy);
+}
+
+.step-description {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-charcoal-muted);
+  max-width: 44ch;
+}
+
+.step-caution {
+  margin-top: 0.85rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--color-burgundy);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-burgundy);
+  max-width: 44ch;
+}
+
+/* Mobile & Tablet Inline Figure (Seamless, Single Surface) */
+.step-mobile-figure {
+  display: none;
+  margin-bottom: 1.35rem;
+  background-color: #FCEFDC;
+  border-bottom: 1px solid var(--color-gold-line);
+  padding: 0.5rem 0 1.25rem;
+  aspect-ratio: 4 / 3.2;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-mobile-img {
+  width: 100%;
+  height: 100%;
+  max-height: 340px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* --------------------------------------------------------------------------
+   7. Section D — Scroll-Expanding 3D Video Demonstration
+   -------------------------------------------------------------------------- */
+.video-section {
+  padding-top: 6.5rem;
+  padding-bottom: 6.5rem;
+  background-color: var(--color-ivory);
+  border-bottom: 1px solid var(--color-gold-line);
+  perspective: var(--stage-perspective);
+}
+
+.video-container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.video-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.25rem;
+  flex-wrap: wrap;
+}
+
+.video-title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.video-note {
+  font-size: 0.95rem;
+  color: var(--color-charcoal-muted);
+  margin-top: 0.45rem;
+}
+
+.video-chapters {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.75rem;
+  border-bottom: 1px solid var(--color-gold-line);
+  padding-bottom: 0.35rem;
+}
+
+.chapter-btn {
+  position: relative;
+  font-size: 0.9rem;
+  color: var(--color-charcoal-muted);
+  padding: 0.4rem 0;
+  min-height: 40px;
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+.chapter-btn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -0.35rem;
+  width: 100%;
+  height: 1.5px;
+  background-color: var(--color-burgundy);
+  transform: scaleX(0);
+  transition: transform var(--duration-fast) var(--ease-luxury);
+}
+
+.chapter-btn:hover {
+  color: var(--color-charcoal);
+}
+
+.chapter-btn.is-active {
+  color: var(--color-burgundy);
+  font-weight: 600;
+}
+
+.chapter-btn.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Scroll-Driven 3D Unfolding Video Stage */
+.video-3d-frame {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform 150ms linear;
+}
+
+.video-stage {
+  position: relative;
+  width: 100%;
+  background-color: #161210;
+  border: 1px solid var(--color-gold-line);
+  overflow: hidden;
+  box-shadow: 0 32px 64px -24px rgba(35, 29, 26, 0.24);
+}
+
+.demo-video {
+  width: 100%;
+  max-height: 620px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background-color: #161210;
+  cursor: pointer;
+}
+
+.video-center-play {
+  position: absolute;
+  inset: 0;
+  bottom: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(22, 18, 16, 0.24);
+  transition: opacity var(--duration-fast) var(--ease-luxury);
+}
+
+.video-stage.is-playing .video-center-play {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.center-play-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: rgba(254, 245, 231, 0.96);
+  color: var(--color-burgundy);
+  border: 1px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--duration-fast) var(--ease-luxury);
+}
+
+.video-center-play:hover .center-play-circle {
+  transform: scale(1.08);
+}
+
+.video-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.25rem;
+  background-color: var(--color-charcoal);
+  color: var(--color-cream);
+}
+
+.control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+  color: var(--color-cream);
+  opacity: 0.9;
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+.control-btn:hover {
+  color: var(--color-gold-bright);
+}
+
+.control-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.seek-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+.seek-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  background: rgba(254, 245, 231, 0.25);
+  outline: none;
+  cursor: pointer;
+}
+
+.seek-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--color-gold-bright);
+  cursor: pointer;
+}
+
+.video-time {
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  color: rgba(254, 245, 231, 0.82);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   8. Section E — 3-Column Saree Editorial Triptych
+      (Single Arch Silhouette Direct on Image — ZERO Back-Card Box!)
+   -------------------------------------------------------------------------- */
+.gallery-section {
+  padding-top: 6.5rem;
+  padding-bottom: 7rem;
+  background-color: var(--color-cream);
+  border-bottom: 1px solid var(--color-gold-line);
+  overflow: hidden;
+}
+
+.gallery-triptych-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+  perspective: var(--stage-perspective);
+}
+
+/* No outer card border, no outer background, no double frame */
+.gallery-triptych-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Single Royal Arch Silhouette Directly on the Portrait Image */
+.gallery-arch-button {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 220px 220px 4px 4px;
+  overflow: hidden;
+  background-color: #F9E7D2;
+  border: 1px solid rgba(184, 147, 88, 0.36);
+  cursor: zoom-in;
+  display: block;
+  box-shadow: 0 22px 44px -24px rgba(35, 29, 26, 0.18);
+  transition: border-color var(--duration-fast) var(--ease-luxury),
+              box-shadow var(--duration-medium) var(--ease-luxury);
+}
+
+.gallery-arch-button:hover {
+  border-color: var(--color-burgundy);
+  box-shadow: 0 30px 56px -20px rgba(126, 25, 33, 0.22);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform var(--duration-slow) var(--ease-luxury);
+}
+
+.gallery-arch-button:hover .gallery-img {
+  transform: scale(1.04);
+}
+
+.gallery-caption {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.gallery-caption-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-charcoal);
+}
+
+.gallery-caption-sub {
+  font-size: 0.875rem;
+  color: var(--color-charcoal-muted);
+}
+
+/* --------------------------------------------------------------------------
+   9. Section F — Frameless Royal Burgundy Reminder & Multi-Column Footer
+   -------------------------------------------------------------------------- */
+.reminder-section {
+  padding-top: 5.5rem;
+  padding-bottom: 5.5rem;
+  background: linear-gradient(180deg, var(--color-burgundy) 0%, var(--color-burgundy-dark) 100%);
+  color: var(--color-cream);
+  text-align: center;
+}
+
+.reminder-inner {
+  max-width: 50rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+}
+
+.reminder-quote {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 3.3vw, 2.85rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.25;
+  color: var(--color-cream);
+  text-wrap: balance;
+}
+
+.reminder-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.35rem;
+}
+
+.utility-link {
+  position: relative;
+  font-size: 0.92rem;
+  color: rgba(254, 245, 231, 0.92);
+  padding: 0.4rem 0;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--color-gold-bright);
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+.utility-link:hover {
+  color: #ffffff;
+}
+
+.utility-divider {
+  color: var(--color-gold-bright);
+}
+
+/* Multi-Column Heritage Footer (Matching Reference Image) */
+.site-footer {
+  padding: 4rem 0 2.5rem;
+  background-color: var(--color-burgundy-deep);
+  color: rgba(254, 245, 231, 0.85);
+  border-top: 1px solid rgba(184, 147, 88, 0.26);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(184, 147, 88, 0.18);
+}
+
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.15rem;
+}
+
+.footer-logo-link {
+  display: inline-block;
+  transition: transform var(--duration-fast) var(--ease-luxury);
+}
+
+.footer-logo-link:hover {
+  transform: translateY(-2px);
+}
+
+.footer-logo-img {
+  height: 4.5rem;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-heritage-text {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(254, 245, 231, 0.76);
+  max-width: 38ch;
+}
+
+.footer-links-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.footer-col-heading {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-gold-bright);
+}
+
+.footer-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.footer-nav-link {
+  font-size: 0.9rem;
+  color: rgba(254, 245, 231, 0.8);
+  transition: color var(--duration-fast) var(--ease-luxury);
+}
+
+.footer-nav-link:hover {
+  color: var(--color-cream);
+}
+
+.footer-bottom-bar {
+  padding-top: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: rgba(254, 245, 231, 0.62);
+}
+
+/* --------------------------------------------------------------------------
+   10. Accessible Lightbox Modal
+   -------------------------------------------------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: rgba(22, 18, 16, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-luxury);
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-figure {
+  max-width: 90vw;
+  max-height: 86vh;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+}
+
+.lightbox-close,
+.lightbox-nav {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-cream);
+  opacity: 0.85;
+  transition: opacity var(--duration-fast) var(--ease-luxury),
+              color var(--duration-fast) var(--ease-luxury);
+}
+
+.lightbox-close:hover,
+.lightbox-nav:hover {
+  opacity: 1;
+  color: var(--color-gold-bright);
+}
+
+.lightbox-close {
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.lightbox-prev {
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-next {
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* --------------------------------------------------------------------------
+   11. All-Device Responsive Display Alignments
+       (1024px Tablet Landscape, 900px Tablet Portrait, 768px Phablet,
+        640px Compact Tablet, 420px Mobile, 360px Small Phone)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .container {
+    padding-left: var(--gutter-tablet);
+    padding-right: var(--gutter-tablet);
+  }
+
+  .hero-scroll-track {
+    min-height: auto;
+  }
+
+  .hero-sticky-viewport {
+    position: relative;
+    top: 0;
+    min-height: auto;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr 1.15fr;
+    gap: 2.25rem;
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .guide-scroll-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .guide-pinned-stage-col {
+    display: none;
+  }
+
+  .guide-steps-stream {
+    padding-top: 0;
+    padding-bottom: 1rem;
+    max-width: 44rem;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .guide-step {
+    min-height: auto;
+    opacity: 1;
+    transform: none;
+    padding: 2.5rem 0;
+  }
+
+  .step-heading {
+    color: var(--color-burgundy);
+  }
+
+  .step-mobile-figure {
+    display: flex;
+  }
+
+  .gallery-triptych-grid {
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 900px) {
+  :root {
+    --header-height: 4.5rem;
+  }
+
+  /* Left Logo | Center Nav | Right Language Switch on Tablet & Mobile */
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .brand-link {
+    order: 1;
+    padding: 0;
+  }
+
+  .brand-logo-img {
+    height: 3.25rem;
+  }
+
+  .primary-nav {
+    order: 2;
+    gap: 1.35rem;
+  }
+
+  .lang-switch {
+    order: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    padding-bottom: 2.75rem;
+  }
+
+  /* Deliberate Vertical Stack on Mobile: Product Showcase First, Copy Below */
+  .hero-3d-stage {
+    order: -1;
+    aspect-ratio: 4 / 3.15;
+    max-height: 350px;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .hero-copy {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .heritage-overline-group {
+    align-items: center;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .finish-selector {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .finish-options {
+    justify-content: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .guide-scroll-section,
+  .video-section,
+  .gallery-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .section-editorial-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .video-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+  }
+
+  .video-title-block {
+    align-items: center;
+  }
+
+  .video-chapters {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Single-column centered arch portraits on mobile */
+  .gallery-triptych-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+    gap: 2.75rem;
+  }
+
+  .reminder-section {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.25rem;
+  }
+
+  .footer-brand-col {
+    align-items: center;
+  }
+
+  .footer-heritage-text {
+    margin: 0 auto;
+  }
+
+  .footer-bottom-bar {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --header-height: 4.15rem;
+  }
+
+  .container {
+    padding-left: var(--gutter-mobile);
+    padding-right: var(--gutter-mobile);
+  }
+
+  .brand-logo-img {
+    height: 2.85rem;
+  }
+
+  .primary-nav {
+    gap: 0.75rem;
+  }
+
+  .nav-link,
+  .lang-btn {
+    font-size: 0.78rem;
+  }
+
+  .hero-headline {
+    font-size: 2.2rem;
+  }
+
+  .hero-3d-stage {
+    max-height: 290px;
+  }
+
+  .video-controls {
+    padding: 0.65rem 0.85rem;
+    gap: 0.55rem;
+  }
+
+  .video-time {
+    font-size: 0.75rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. Reduced Motion & Print Styles
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .scroll-progress-bar,
+  .primary-nav,
+  .lang-switch,
+  .hero-actions,
+  .finish-selector,
+  .guide-pinned-stage-col,
+  .video-section,
+  .gallery-section,
+  .reminder-actions,
+  .footer-links-col,
+  .lightbox {
+    display: none !important;
+  }
+
+  .site-header {
+    position: static !important;
+    height: auto !important;
+    padding: 1rem 0 !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #cccccc !important;
+  }
+
+  .header-inner {
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .hero-scroll-track,
+  .heritage-motif-strip,
+  .guide-scroll-section,
+  .reminder-section,
+  .site-footer {
+    min-height: auto !important;
+    padding: 1.25rem 0 !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .guide-step {
+    min-height: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
+    padding: 1rem 0 !important;
+    page-break-inside: avoid;
+    display: grid !important;
+    grid-template-columns: 160px 1fr !important;
+    gap: 1.5rem !important;
+    align-items: center !important;
+  }
+
+  .step-mobile-figure {
+    display: flex !important;
+    margin: 0 !important;
+  }
+
+  .step-mobile-img {
+    max-height: 130px !important;
+  }
+}
